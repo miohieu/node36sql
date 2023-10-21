@@ -1,0 +1,31 @@
+---bai1--
+SELECT u.user_id, u.full_name, COUNT(l.user_id) AS like_count
+FROM user u JOIN like_res l ON u.user_id = l.user_id
+GROUP BY u.user_id
+ORDER BY like_count DESC
+LIMIT 5;
+
+---bai 2---
+SELECT r.res_id, r.res_name, COUNT(l.res_id) AS like_count
+FROM restaurant r JOIN like_res l ON r.res_id = l.res_id
+GROUP BY r.res_id
+ORDER BY like_count DESC
+LIMIT 2;
+
+---bai 3---
+SELECT full_name, sum(amount) AS m
+FROM orders o join user u on o.user_id = u.user_id
+group by u.full_name
+order by m desc
+limit 1;
+
+---Bai 4---
+SELECT u.user_id, u.full_name
+FROM user u
+left JOIN like_res l ON u.user_id = l.user_id
+left join orders o on u.user_id = o.user_id 
+left join rate_res rr on u.user_id = rr.user_id 
+where l.user_id is null
+and  o.user_id is null
+and rr.user_id is null
+;
